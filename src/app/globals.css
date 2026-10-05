@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f5f3ee;
+  --card: #ffffff;
+  --ink: #1b1a18;
+  --ink-2: #55534e;
+  --muted: #8a8780;
+  --line: #e4e1d8;
+  --food: #eb6834;
+  --sleep: #4a3aa7;
+  --toilet: #1baf7a;
+  --danger: #d03b3b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0e0e0d;
+    --card: #1b1b19;
+    --ink: #f6f5f1;
+    --ink-2: #c3c2b7;
+    --muted: #8f8d86;
+    --line: #2e2e2b;
+    --food: #d95926;
+    --sleep: #9085e9;
+    --toilet: #199e70;
+    --danger: #e66767;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-food: var(--food);
+  --color-sleep: var(--sleep);
+  --color-toilet: var(--toilet);
+  --color-danger: var(--danger);
+}
+
+@theme {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI",
+    Roboto, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button,
+a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* iOS-style picker wheel */
+.wheel {
+  position: relative;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  touch-action: pan-y;
+  outline: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 32%, #000 68%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 32%, #000 68%, transparent);
+}
+
+.wheel::-webkit-scrollbar {
+  display: none;
+}
+
+.wheel:focus-visible {
+  background: color-mix(in oklab, var(--ink) 5%, transparent);
+  border-radius: 12px;
+}
+
+.wheel-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  font-size: 21px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.sheet-panel {
+  animation: sheet-up 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.sheet-backdrop {
+  animation: fade-in 0.2s ease-out;
+}
+
+.toast {
+  animation: toast-in 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet-panel,
+  .sheet-backdrop,
+  .toast {
+    animation: none;
+  }
+}
